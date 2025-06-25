@@ -1,0 +1,8 @@
+{
+  "activeStrategies": ["MACD-Trend", "RSI-Reversal"],
+  "recommendedStrategy": "MACD-Trend",
+  "pnl": "+8.2%",
+  "winRate": "64%",
+  "sharpeRatio": "1.28",
+  "profitFactor": "2.15"
+}
