@@ -1,0 +1,3 @@
+# Your entire script goes here, line by line
+print("No need to press CTRL-D now!")
+# ...
