@@ -1,0 +1,36 @@
+{
+  "timestamp": "2025-06-29T00:11:53.435540",
+  "strategy": "sentiment",
+  "signals": [
+    {
+      "symbol": "BTCUSDT",
+      "signal": "hold",
+      "confidence": 0.6,
+      "sentiment_score": -0.013572359458778438
+    },
+    {
+      "symbol": "ETHUSDT",
+      "signal": "buy",
+      "confidence": 0.7,
+      "sentiment_score": 0.7855388690086798
+    },
+    {
+      "symbol": "ADAUSDT",
+      "signal": "hold",
+      "confidence": 0.6,
+      "sentiment_score": -0.2665996767172052
+    },
+    {
+      "symbol": "BNBUSDT",
+      "signal": "sell",
+      "confidence": 0.7,
+      "sentiment_score": -0.352039106417124
+    },
+    {
+      "symbol": "SOLUSDT",
+      "signal": "buy",
+      "confidence": 0.7,
+      "sentiment_score": 0.4308777008876401
+    }
+  ]
+}

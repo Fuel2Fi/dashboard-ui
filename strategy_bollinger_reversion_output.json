@@ -1,0 +1,31 @@
+{
+  "timestamp": "2025-06-29T00:10:55.977299",
+  "strategy": "bollinger_reversion",
+  "signals": [
+    {
+      "symbol": "BTCUSDT",
+      "signal": "hold",
+      "confidence": 0.6
+    },
+    {
+      "symbol": "ETHUSDT",
+      "signal": "hold",
+      "confidence": 0.6
+    },
+    {
+      "symbol": "ADAUSDT",
+      "signal": "hold",
+      "confidence": 0.6
+    },
+    {
+      "symbol": "BNBUSDT",
+      "signal": "hold",
+      "confidence": 0.6
+    },
+    {
+      "symbol": "SOLUSDT",
+      "signal": "hold",
+      "confidence": 0.6
+    }
+  ]
+}

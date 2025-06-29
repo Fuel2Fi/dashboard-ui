@@ -1,0 +1,81 @@
+{
+  "timestamp": "2025-06-29T00:12:25.353336",
+  "method": "dynamic_switching",
+  "decisions": [
+    {
+      "symbol": "BTCUSDT",
+      "decision": "hold",
+      "votes": {
+        "buy": 2,
+        "sell": 2,
+        "hold": 3,
+        "conf_sum": {
+          "buy": 1.5,
+          "sell": 1.35,
+          "hold": 1.9500000000000002
+        }
+      },
+      "avg_confidence": 0.65
+    },
+    {
+      "symbol": "ETHUSDT",
+      "decision": "hold",
+      "votes": {
+        "buy": 1,
+        "sell": 1,
+        "hold": 4,
+        "conf_sum": {
+          "buy": 0.7,
+          "sell": 0.65,
+          "hold": 2.65
+        }
+      },
+      "avg_confidence": 0.662
+    },
+    {
+      "symbol": "ADAUSDT",
+      "decision": "hold",
+      "votes": {
+        "buy": 2,
+        "sell": 0,
+        "hold": 4,
+        "conf_sum": {
+          "buy": 1.4,
+          "sell": 0,
+          "hold": 2.65
+        }
+      },
+      "avg_confidence": 0.662
+    },
+    {
+      "symbol": "BNBUSDT",
+      "decision": "hold",
+      "votes": {
+        "buy": 2,
+        "sell": 1,
+        "hold": 3,
+        "conf_sum": {
+          "buy": 1.35,
+          "sell": 0.7,
+          "hold": 1.9500000000000002
+        }
+      },
+      "avg_confidence": 0.65
+    },
+    {
+      "symbol": "SOLUSDT",
+      "decision": "buy",
+      "votes": {
+        "buy": 3,
+        "sell": 0,
+        "hold": 3,
+        "conf_sum": {
+          "buy": 2.0999999999999996,
+          "sell": 0,
+          "hold": 2.05
+        }
+      },
+      "avg_confidence": 0.7
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "timestamp": "2025-06-29T00:11:22.013957",
+  "strategy": "macd_crossovers",
+  "signals": [
+    {
+      "symbol": "BTCUSDT",
+      "signal": "hold",
+      "confidence": 0.6
+    },
+    {
+      "symbol": "ETHUSDT",
+      "signal": "hold",
+      "confidence": 0.6
+    },
+    {
+      "symbol": "ADAUSDT",
+      "signal": "hold",
+      "confidence": 0.6
+    },
+    {
+      "symbol": "BNBUSDT",
+      "signal": "hold",
+      "confidence": 0.6
+    },
+    {
+      "symbol": "SOLUSDT",
+      "signal": "hold",
+      "confidence": 0.6
+    }
+  ]
+}

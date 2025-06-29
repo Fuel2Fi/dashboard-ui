@@ -1,0 +1,51 @@
+{
+  "timestamp": "2025-06-29T00:07:20.163489",
+  "method": "majority_vote_with_tiebreak",
+  "decisions": [
+    {
+      "symbol": "BTCUSDT",
+      "consensus_signal": "hold",
+      "vote_breakdown": {
+        "buy": 2,
+        "sell": 2,
+        "hold": 2
+      }
+    },
+    {
+      "symbol": "ETHUSDT",
+      "consensus_signal": "hold",
+      "vote_breakdown": {
+        "buy": 0,
+        "sell": 1,
+        "hold": 4
+      }
+    },
+    {
+      "symbol": "ADAUSDT",
+      "consensus_signal": "hold",
+      "vote_breakdown": {
+        "buy": 2,
+        "sell": 0,
+        "hold": 3
+      }
+    },
+    {
+      "symbol": "BNBUSDT",
+      "consensus_signal": "hold",
+      "vote_breakdown": {
+        "buy": 2,
+        "sell": 0,
+        "hold": 3
+      }
+    },
+    {
+      "symbol": "SOLUSDT",
+      "consensus_signal": "hold",
+      "vote_breakdown": {
+        "buy": 2,
+        "sell": 0,
+        "hold": 3
+      }
+    }
+  ]
+}

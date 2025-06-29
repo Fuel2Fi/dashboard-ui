@@ -1,0 +1,31 @@
+{
+  "timestamp": "2025-06-29T00:07:18.801613",
+  "strategy": "rsi_divergence",
+  "signals": [
+    {
+      "symbol": "BTCUSDT",
+      "signal": "buy",
+      "confidence": 0.75
+    },
+    {
+      "symbol": "ETHUSDT",
+      "signal": "hold",
+      "confidence": 0.6
+    },
+    {
+      "symbol": "ADAUSDT",
+      "signal": "buy",
+      "confidence": 0.75
+    },
+    {
+      "symbol": "BNBUSDT",
+      "signal": "hold",
+      "confidence": 0.6
+    },
+    {
+      "symbol": "SOLUSDT",
+      "signal": "buy",
+      "confidence": 0.75
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "timestamp": "2025-06-29T00:07:20.082109",
+  "strategy": "ml_classifier",
+  "signals": [
+    {
+      "symbol": "BTCUSDT",
+      "signal": "buy",
+      "confidence": 0.75
+    }
+  ]
+}

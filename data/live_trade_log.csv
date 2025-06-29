@@ -1,0 +1,12 @@
+timestamp,symbol,signal,result,executed_at
+2025-05-18 04:00:00,SOL/USDT,SELL,"ERROR: binanceus {""code"":-1013,""msg"":""Filter failure: MIN_NOTIONAL""}",2025-06-28T22:31:44.708042
+2025-05-18 04:00:00,ETH/USDT,BUY,"ERROR: binanceus {""code"":-1013,""msg"":""Filter failure: MIN_NOTIONAL""}",2025-06-28T22:31:44.925973
+2025-05-18 04:00:00,ADA/USDT,SELL,"ERROR: binanceus {""code"":-1013,""msg"":""Filter failure: MIN_NOTIONAL""}",2025-06-28T22:31:45.144466
+2025-05-18 04:00:00,ETH/USDT,BUY,BUY order placed: 0.004103 ETH for ~10.0 USDT,2025-06-28T22:40:06.294110
+2025-05-18 04:00:00,ADA/USDT,SELL,ERROR: binanceus Account has insufficient balance for requested action.,2025-06-28T22:40:06.504977
+2025-05-18 04:00:00,SOL/USDT,SELL,ERROR: binanceus Account has insufficient balance for requested action.,2025-06-28T22:40:06.713756
+2025-06-28T19:00:00,SOLUSDT,SELL,ERROR: binanceus Account has insufficient balance for requested action.,2025-06-28T23:09:45.373358
+2025-06-28T19:00:00,ETHUSDT,SELL,SELL order placed: 0.004 ETHUSDT,2025-06-28T23:09:45.591690
+2025-06-28T19:00:00,BTCUSDT,HOLD,No action (hold),2025-06-28T23:09:45.592918
+2025-06-28T19:00:00,ADAUSDT,SELL,ERROR: binanceus Account has insufficient balance for requested action.,2025-06-28T23:09:45.800670
+2025-06-28T19:00:00,BNBUSDT,HOLD,No action (hold),2025-06-28T23:09:45.801835
