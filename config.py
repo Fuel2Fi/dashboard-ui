@@ -1,0 +1,2 @@
+API_KEY = "NynkeMl6Mb5wT1thgJtWitZrjwJyEAIbyg55u5jZj4rQi3BW6ie8F17ZpsZxoURT"
+API_SECRET = "k2Pml4sp17VaWksZize9mXpoLWXl6cdr8f9k8affQ48sjUSWWSLmm9t4Pls7SfeE"

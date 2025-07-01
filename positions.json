@@ -1,0 +1,47 @@
+{
+    "BTCUSDT": {
+        "position_type": null,
+        "entry_price": null,
+        "high_since_entry": null,
+        "low_since_entry": null,
+        "trailing_stop": null,
+        "take_profit": null,
+        "last_updated": null
+    },
+    "ETHUSDT": {
+        "position_type": null,
+        "entry_price": null,
+        "high_since_entry": null,
+        "low_since_entry": null,
+        "trailing_stop": null,
+        "take_profit": null,
+        "last_updated": null
+    },
+    "SOLUSDT": {
+        "position_type": null,
+        "entry_price": null,
+        "high_since_entry": null,
+        "low_since_entry": null,
+        "trailing_stop": null,
+        "take_profit": null,
+        "last_updated": null
+    },
+    "ADAUSDT": {
+        "position_type": null,
+        "entry_price": null,
+        "high_since_entry": null,
+        "low_since_entry": null,
+        "trailing_stop": null,
+        "take_profit": null,
+        "last_updated": null
+    },
+    "BNBUSDT": {
+        "position_type": null,
+        "entry_price": null,
+        "high_since_entry": null,
+        "low_since_entry": null,
+        "trailing_stop": null,
+        "take_profit": null,
+        "last_updated": null
+    }
+}

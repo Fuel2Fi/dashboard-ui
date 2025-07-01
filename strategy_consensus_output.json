@@ -4,7 +4,7 @@
   "decisions": [
     {
       "symbol": "BTCUSDT",
-      "consensus_signal": "hold",
+      "consensus_signal": "buy",
       "vote_breakdown": {
         "buy": 2,
         "sell": 2,
@@ -13,7 +13,7 @@
     },
     {
       "symbol": "ETHUSDT",
-      "consensus_signal": "hold",
+      "consensus_signal": "sell",
       "vote_breakdown": {
         "buy": 0,
         "sell": 1,

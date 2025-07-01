@@ -1,0 +1,4 @@
+bash: /Users/damonholland777/Desktop/trading_bot/run_strategies_switch_and_execute.sh: Operation not permitted
+bash: /Users/damonholland777/Desktop/trading_bot/run_strategies_switch_and_execute.sh: Operation not permitted
+bash: /Users/damonholland777/Desktop/trading_bot/run_strategies_switch_and_execute.sh: Operation not permitted
+bash: /Users/damonholland777/Desktop/trading_bot/run_strategies_switch_and_execute.sh: Operation not permitted

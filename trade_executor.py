@@ -1,31 +1,63 @@
 #!/usr/bin/env python3
-import ccxt
 import os
-from dotenv import load_dotenv
+import time
+import hmac
+import hashlib
+import requests
 
-# Load environment variables
-load_dotenv()
+API_KEY = os.environ.get("BINANCE_API_KEY")
+API_SECRET = os.environ.get("BINANCE_API_SECRET").encode()
 
-BINANCE_API_KEY = os.getenv("BINANCE_API_KEY")
-BINANCE_SECRET_KEY = os.getenv("BINANCE_SECRET_KEY")
+BASE_URL = "https://api.binance.us"
 
-# Initialize exchange
-exchange = ccxt.binance({
-    "apiKey": BINANCE_API_KEY,
-    "secret": BINANCE_SECRET_KEY,
-    "enableRateLimit": True,
-})
+def get_server_time():
+    url = f"{BASE_URL}/api/v3/time"
+    r = requests.get(url)
+    return r.json()["serverTime"]
 
-# Fetch account balance
-balance = exchange.fetch_balance()
-print("✅ Account balances:")
-for currency, details in balance['total'].items():
-    if details > 0:
-        print(f"{currency}: {details}")
+def get_price(symbol):
+    url = f"{BASE_URL}/api/v3/ticker/price"
+    r = requests.get(url, params={"symbol": symbol})
+    return float(r.json()["price"])
 
-# Fetch ticker data for BTC/USDT
-ticker = exchange.fetch_ticker('BTC/USDT')
-print("\n✅ BTC/USDT Ticker:")
-print(f"Last Price: {ticker['last']}")
-print(f"Bid: {ticker['bid']}")
-print(f"Ask: {ticker['ask']}")
+def place_order(symbol, side, max_usd=10):
+    price = get_price(symbol)
+    quantity = round(max_usd / price, 6)
+
+    # Apply Binance.US min quantity per symbol
+    if "BTC" in symbol and quantity < 0.0001:
+        quantity = 0.0001
+    if "ETH" in symbol and quantity < 0.001:
+        quantity = 0.001
+    if "SOL" in symbol and quantity < 0.01:
+        quantity = 0.01
+    if "ADA" in symbol and quantity < 1:
+        quantity = 1
+
+    # Round quantity to 6 decimals to comply with step size
+    quantity = round(quantity, 6)
+
+    timestamp = get_server_time()
+    params = {
+        "symbol": symbol,
+        "side": side.upper(),
+        "type": "MARKET",
+        "quantity": quantity,
+        "timestamp": timestamp,
+    }
+
+    query_string = "&".join([f"{k}={v}" for k, v in params.items()])
+    signature = hmac.new(API_SECRET, query_string.encode(), hashlib.sha256).hexdigest()
+    params["signature"] = signature
+
+    headers = {
+        "X-MBX-APIKEY": API_KEY
+    }
+
+    url = f"{BASE_URL}/api/v3/order"
+    response = requests.post(url, headers=headers, params=params)
+
+    if response.status_code != 200:
+        raise Exception(f"Order failed: {response.text}")
+
+    return response.json()

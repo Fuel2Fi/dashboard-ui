@@ -1,9 +1,10 @@
-import React from "react";
-import Dashboard from "./pages/Dashboard";
+import Dashboard from './Dashboard';
 
 function App() {
   return (
-    <Dashboard />
+    <div className="dark bg-gray-900 text-white min-h-screen">
+      <Dashboard />
+    </div>
   );
 }
 

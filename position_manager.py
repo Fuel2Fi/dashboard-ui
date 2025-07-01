@@ -1,66 +1,48 @@
-#!/usr/bin/env python3
 import json
 import os
-from datetime import datetime
+from datetime import datetime, timezone
 
-POSITIONS_FILE = os.path.expanduser("~/Desktop/trading_bot/data/positions.json")
+POSITIONS_FILE = "positions.json"
 
 def load_positions():
-    """Load current positions from the JSON file."""
     if not os.path.exists(POSITIONS_FILE):
-        return {}
+        return []
     with open(POSITIONS_FILE, "r") as f:
         return json.load(f)
 
 def save_positions(positions):
-    """Save positions to the JSON file."""
     with open(POSITIONS_FILE, "w") as f:
-        json.dump(positions, f, indent=4)
+        json.dump(positions, f, indent=2)
 
-def update_position(symbol, side, qty, price):
-    """
-    Update positions after a trade.
-    - symbol: e.g., "ETH/USDT"
-    - side: "buy" or "sell"
-    - qty: quantity traded
-    - price: executed price
-    """
+def add_position(symbol, entry_price, quantity, strategy, stop_loss_pct=0.03, take_profit_pct=0.05, trailing_pct=0.02):
     positions = load_positions()
-    timestamp = datetime.utcnow().isoformat()
-
-    if symbol not in positions:
-        positions[symbol] = {
-            "side": side,
-            "qty": qty,
-            "average_price": price,
-            "last_updated": timestamp
-        }
-    else:
-        pos = positions[symbol]
-        if side == pos["side"]:
-            # Adding to existing position
-            total_qty = pos["qty"] + qty
-            avg_price = (pos["average_price"] * pos["qty"] + price * qty) / total_qty
-            positions[symbol] = {
-                "side": side,
-                "qty": total_qty,
-                "average_price": avg_price,
-                "last_updated": timestamp
-            }
-        else:
-            # Reducing or closing position
-            net_qty = pos["qty"] - qty
-            if net_qty > 0:
-                positions[symbol]["qty"] = net_qty
-                positions[symbol]["last_updated"] = timestamp
-            else:
-                # Position closed
-                del positions[symbol]
-
+    positions.append({
+        "symbol": symbol,
+        "entry_price": entry_price,
+        "quantity": quantity,
+        "strategy": strategy,
+        "stop_loss_pct": stop_loss_pct,
+        "take_profit_pct": take_profit_pct,
+        "trailing_pct": trailing_pct,
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "highest_price": entry_price  # for trailing stops
+    })
     save_positions(positions)
-    print(f"✅ Position updated: {symbol} | {side.upper()} | Qty: {qty}")
+    print(f"✅ Added position: {symbol} {quantity} at {entry_price}")
 
-if __name__ == "__main__":
-    # Quick test example
-    update_position("ETH/USDT", "buy", 0.01, 3500)
-    print(json.dumps(load_positions(), indent=4))
+def update_highest_price(symbol, current_price):
+    positions = load_positions()
+    updated = False
+    for pos in positions:
+        if pos["symbol"] == symbol:
+            if current_price > pos["highest_price"]:
+                pos["highest_price"] = current_price
+                updated = True
+    if updated:
+        save_positions(positions)
+
+def remove_position(symbol):
+    positions = load_positions()
+    positions = [p for p in positions if p["symbol"] != symbol]
+    save_positions(positions)
+    print(f"✅ Removed position: {symbol}")

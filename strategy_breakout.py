@@ -1,28 +1,20 @@
-#!/usr/bin/env python3
 import json
-from datetime import datetime
+from datetime import datetime, timezone
 
-timestamp = datetime.utcnow().isoformat()
+def generate_breakout_signals():
+    timestamp = datetime.now(timezone.utc).isoformat()
+    signals = []
+    for symbol in ["BTCUSDT", "ETHUSDT", "ADAUSDT", "BNBUSDT", "SOLUSDT"]:
+        signals.append({
+            "symbol": symbol,
+            "signal": "hold",
+            "confidence": 0.75
+        })
+    return {
+        "timestamp": timestamp,
+        "strategy": "breakout",
+        "signals": signals
+    }
 
-signals = []
-symbols = ["BTCUSDT", "ETHUSDT", "ADAUSDT", "BNBUSDT", "SOLUSDT"]
-
-for symbol in symbols:
-    signals.append({
-        "symbol": symbol,
-        "signal": "hold",
-        "confidence": 0.75
-    })
-
-output = {
-    "timestamp": timestamp,
-    "strategy": "breakout",
-    "signals": signals
-}
-
-# Print to console
-print(json.dumps(output, indent=2))
-
-# Save to file
-with open("./strategy_breakout_output.json", "w") as f:
-    json.dump(output, f, indent=2)
+if __name__ == "__main__":
+    print(json.dumps(generate_breakout_signals(), indent=2))
