@@ -7,7 +7,7 @@ def main():
     df.set_index("Date", inplace=True)
 
     # Pick which strategy to test here:
-    strategy = "breakout"
+    strategy = "gaussian_macd"
 
     # Run the selected strategy
     result_df = run_selected_strategy(df, strategy)
