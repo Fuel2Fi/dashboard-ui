@@ -1,0 +1,1 @@
+0 */4 * * * /Users/damonholland777/Desktop/trading_bot/cme_futures_bot/auto_update.sh >> /Users/damonholland777/Desktop/trading_bot/cme_futures_bot/cron_log.txt 2>&1
