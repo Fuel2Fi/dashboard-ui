@@ -1,0 +1,6 @@
+Date,Price,ExitStatus
+2025-07-06,900,No exit
+2025-07-07,1200,No exit
+2025-07-08,950,Exit triggered
+2025-07-09,1020,No exit
+2025-07-10,1100,No exit

@@ -1,65 +1,75 @@
-import warnings
-warnings.filterwarnings(
-    "ignore",
-    message="The behavior of DataFrame concatenation with empty or all-NA entries is deprecated",
-    category=FutureWarning
-)
-
 import pandas as pd
-from strategy_selector import run_selected_strategy
-from consensus_engine import get_consensus_signal
-from performance_tracker import PerformanceTracker
+from exit_engine import ExitStrategy
 
 def main():
-    # Load historical data
-    df = pd.read_csv("historical_data.csv", parse_dates=["Date"])
-    df.set_index("Date", inplace=True)
+    # Load market data
+    df = pd.read_csv("market_data.csv")
 
-    # Define strategy performance summary files
-    performance_csv_paths = {
-        "trend_following": "trend_following_performance_summary.csv",
-        "mean_reversion": "mean_reversion_performance_summary.csv",
-        "breakout": "breakout_performance_summary.csv",
-        "rsi_divergence": "rsi_divergence_performance_summary.csv",
-        "gaussian_macd": "gaussian_macd_performance_summary.csv"
-    }
+    # Initialize ExitStrategy
+    exit_engine = ExitStrategy()
 
-    # Select top strategies
-    from strategy_switcher import select_top_strategies
-    top_strategies = select_top_strategies(performance_csv_paths, top_n=3)
+    # Performance tracking
+    trade_log = []
+    cumulative_profit = 0
+    wins = 0
+    losses = 0
+    total_trades = 0
+    current_entry_price = None
 
-    # Run selected strategies
-    strategy_results = {}
-    for strat in top_strategies:
-        strat_df = run_selected_strategy(df, strat)
-        strategy_results[strat] = strat_df
+    for _, row in df.iterrows():
+        price = row["Price"]
+        date = row["Date"]
 
-    # Compute consensus signal
-    consensus_df = get_consensus_signal(strategy_results, required_agreement=2)
+        if not exit_engine.in_position:
+            if price > 1000:
+                exit_engine.mark_entry(entry_price=price, date=date)
+                current_entry_price = price
+                status = "Entry triggered"
+                print(f"✅ Entry triggered at {price} on {date}")
+            else:
+                status = "No action"
+                print(f"✅ No action at {price} on {date}")
+        else:
+            exit_result = exit_engine.check_exit_signal(price, date)
+            if exit_result:
+                pnl = price - current_entry_price
+                cumulative_profit += pnl
+                total_trades += 1
+                if pnl >= 0:
+                    wins += 1
+                else:
+                    losses += 1
+                status = f"Exit triggered (PnL: {pnl})"
+                print(f"✅ Exit triggered at {price} on {date} (PnL: {pnl})")
+                current_entry_price = None
+            else:
+                status = "Holding position"
+                print(f"✅ Holding position at {price} on {date}")
 
-    # Display last 10 consensus signals
-    print(consensus_df.tail(10))
+        trade_log.append({
+            "Date": date,
+            "Price": price,
+            "Status": status,
+            "CumulativeProfit": cumulative_profit
+        })
 
-    # Log simulated trades
-    tracker = PerformanceTracker()
-    for date, row in consensus_df.iterrows():
-        signal = row["ConsensusSignal"]
-        price = df.loc[date, "Close"]
-        if signal != "HOLD":
-            tracker.log_trade(
-                date=date.strftime("%Y-%m-%d"),
-                strategy="ConsensusEngine",
-                signal=signal,
-                entry_price=price,
-                exit_price=None
-            )
+    # Save log to CSV
+    log_df = pd.DataFrame(trade_log)
+    log_df.to_csv("trade_performance_log.csv", index=False)
 
-    # Compute and print stats
-    stats = tracker.compute_stats()
-    print("\n✅ Strategy Engine Run Complete.")
-    print("📊 Performance Stats:")
-    for k, v in stats.items():
-        print(f"- {k}: {v}")
+    # Compute summary
+    win_rate = (wins / total_trades * 100) if total_trades > 0 else 0
+    avg_return = (cumulative_profit / total_trades) if total_trades > 0 else 0
+
+    print("\n🎯 Performance Summary")
+    print("--------------------------")
+    print(f"Total Trades: {total_trades}")
+    print(f"Wins: {wins}")
+    print(f"Losses: {losses}")
+    print(f"Win Rate: {win_rate:.2f}%")
+    print(f"Average Return per Trade: {avg_return:.2f}")
+    print(f"Cumulative Profit: {cumulative_profit:.2f}")
+    print("✅ Detailed log saved to trade_performance_log.csv")
 
 if __name__ == "__main__":
     main()

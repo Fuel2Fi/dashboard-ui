@@ -1,40 +1,44 @@
 import pandas as pd
+from exit_strategy import ExitStrategy
 
-def simulate_execution(consensus_csv_path: str):
-    """
-    Simulates execution based on consensus signals.
-    For each signal, logs the intended action.
-    """
-    df = pd.read_csv(consensus_csv_path, parse_dates=["Date"])
-    df.set_index("Date", inplace=True)
+# Load your price data
+df = pd.read_csv("your_price_data.csv", parse_dates=["Date"], index_col="Date")
 
-    positions = []
-    position = None
+exit_engine = ExitStrategy(
+    trailing_stop_pct=2.0,
+    trailing_take_profit_pct=3.5,
+    time_exit_candles=20
+)
 
-    for date, row in df.iterrows():
-        signal = row["ConsensusSignal"]
+# Example: simulate a single long position starting on the first row
+entry_date = df.index[0]
+entry_price = df.iloc[0]["Close"]
+symbol = "SIMULATED"
 
-        if signal == "BUY":
-            if position != "LONG":
-                positions.append(f"{date.date()} - BUY signal triggered. Enter LONG position.")
-                position = "LONG"
-        elif signal == "SELL":
-            if position != "SHORT":
-                positions.append(f"{date.date()} - SELL signal triggered. Enter SHORT position.")
-                position = "SHORT"
-        else:
-            positions.append(f"{date.date()} - HOLD. No action.")
+# Initialize position
+exit_engine.update_position(symbol, entry_date, entry_price, "BUY", entry_price)
 
-    # Output simulation log
-    for entry in positions:
-        print(entry)
+log_rows = []
 
-    # Save to file
-    with open("execution_simulation_log.txt", "w") as f:
-        for entry in positions:
-            f.write(entry + "\n")
+# Iterate through the rest of the data
+for date, row in df.iloc[1:].iterrows():
+    current_price = row["Close"]
+    exit_result = exit_engine.update_position(
+        symbol,
+        date,
+        current_price,
+        "BUY",
+        entry_price
+    )
 
-    print("\n✅ Simulation complete. Log saved to 'execution_simulation_log.txt'.")
+    if exit_result:
+        log_rows.append(exit_result)
+        break  # Stop simulation after exit for this example
 
-if __name__ == "__main__":
-    simulate_execution("consensus_signals.csv")
+# Save the exit log
+if log_rows:
+    log_df = pd.DataFrame(log_rows)
+    log_df.to_csv("exit_simulation_log.csv", index=False)
+    print("✅ Exit simulation complete. Log saved to 'exit_simulation_log.csv'.")
+else:
+    print("✅ No exit triggered during simulation.")

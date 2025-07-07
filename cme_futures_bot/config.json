@@ -1,0 +1,6 @@
+{
+  "trailing_stop_pct": 5,
+  "entry_threshold": 1000,
+  "transaction_fee": 10,
+  "slippage": 5
+}

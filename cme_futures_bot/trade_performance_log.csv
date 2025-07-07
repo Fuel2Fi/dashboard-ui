@@ -1,0 +1,6 @@
+Date,Price,Status,CumulativeProfit
+2025-07-06,900,No action,0
+2025-07-07,1200,Entry triggered,0
+2025-07-08,950,Exit triggered (PnL: -250),-250
+2025-07-09,1020,Entry triggered,-250
+2025-07-10,1100,Holding position,-250

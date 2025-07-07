@@ -1,0 +1,4 @@
+Asset,TotalTrades,Wins,Losses,WinRatePct,AverageReturn,CumulativeProfit,TrailingStopPct,TransactionFeePerTrade,SlippagePerTrade
+BTC,1,0,1,0.0,-95.0,-95,5,10,5
+ETH,2,0,2,0.0,-115.0,-230,5,10,5
+SOL,1,0,1,0.0,-85.0,-85,5,10,5

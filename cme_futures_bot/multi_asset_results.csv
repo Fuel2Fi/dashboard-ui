@@ -1,0 +1,4 @@
+Asset,TotalTrades,Wins,Losses,WinRatePct,AverageReturn,CumulativeProfit
+BTC,1,0,1,0.0,-80.0,-80
+ETH,2,0,2,0.0,-100.0,-200
+SOL,1,0,1,0.0,-70.0,-70
